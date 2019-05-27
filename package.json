@@ -1,17 +1,37 @@
 {
-  "name": "pinyin-filter",
+  "name": "pinyin-test",
   "version": "0.8.1",
   "description": "Chinese pinyin filter",
   "main": "dist/index.js",
   "scripts": {
-    "test": "node test",
+    "test": "mocha",
     "build": "rollup -c"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "roughwin@qq.com",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
+    "mocha": "^6.1.4",
     "rollup-plugin-babel": "^4.3.2"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roughwin/pinyin-filter.git"
+  },
+  "keywords": [
+    "pinyin",
+    "search",
+    "filter",
+    "拼音",
+    "搜索"
+  ],
+  "bugs": {
+    "url": "https://github.com/roughwin/pinyin-filter/issues"
+  },
+  "homepage": "https://github.com/roughwin/pinyin-filter#readme"
 }

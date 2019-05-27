@@ -100,7 +100,7 @@ class Pinyin {
     });
   }
 
-  rank(str, test) {
+  test(str, test) {
     const arr = this.genPinyin(str);
     const testArr = test.split('');
     let startPos = [0, 0, -1];

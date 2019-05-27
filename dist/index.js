@@ -172,7 +172,7 @@
       });
     }
 
-    rank(str, test) {
+    test(str, test) {
       var arr = this.genPinyin(str);
       var testArr = test.split('');
       var startPos = [0, 0, -1];
