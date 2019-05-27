@@ -1,0 +1,17 @@
+{
+  "name": "pinyin-filter",
+  "version": "0.8.1",
+  "description": "Chinese pinyin filter",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "node test",
+    "build": "rollup -c"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "rollup-plugin-babel": "^4.3.2"
+  }
+}
