@@ -41,29 +41,29 @@ function getPos(line, char, lastPos) {
 
 function max(arr = []) {
   return arr.reduce((m, current) => {
-    if (current > m) {
+    if (current.length > m.length) {
       return current;
     }
     return m;
-  }, 0)
+  }, [])
 }
 
-function getSubTestRank(line, subTest, startPos, parentRank) {
+function getSubTestRank(line, subTest, startPos, parentRank = []) {
   if (!subTest.length) return parentRank;
   const positions = getPos(line, subTest[0], startPos);
   if (positions && positions.length) {
     const newSubranks = positions.map((newPos) => {
       let newRank = parentRank;
       if (newPos[0] === 0)
-        newRank = 1;
+        newRank = [0];
       if (newPos[0] !== startPos[0]) {
-        newRank = parentRank + 1
+        newRank.push(newPos[0])
       }
       return getSubTestRank(line, subTest.slice(1), newPos, newRank)
     });
     return max(newSubranks);
   } else {
-    return 0;
+    return [];
   }
 }
 
@@ -104,7 +104,7 @@ class Pinyin {
     const arr = this.genPinyin(str);
     const testArr = test.split('');
     let startPos = [0, 0, -1];
-    const x = getSubTestRank(arr, testArr, startPos, 0)
+    const x = getSubTestRank(arr, testArr, startPos, [])
     return x;
   }
 }
