@@ -21,7 +21,7 @@ describe('test', function() {
   for (const rule of rules) {
     const [desc, originStr, testStr, expectValue] = rule;
     it(desc, function() {
-      assert.equal(pinyin.test(originStr, testStr), expectValue);
+      assert.equal(pinyin.test(originStr, testStr).length, expectValue);
     })
   }
 });

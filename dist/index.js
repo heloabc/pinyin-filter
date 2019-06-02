@@ -56,16 +56,12 @@
     var bsame = b1 === b0;
     var csame = c1 === c0;
 
-    if (asame && !bsame && c0 >= 0) {
-      return false;
-    }
-
-    if (asame && bsame && csame) {
-      return false;
-    }
-
-    if (!asame && c1 > 0) {
-      return false;
+    switch (true) {
+      case asame && !bsame && c0 >= 0:
+      case asame && bsame && csame:
+      case !asame && c1 > 0:
+      case asame && bsame && c1 - c0 != 1:
+        return false;
     }
 
     return newPos;
@@ -109,32 +105,33 @@
   function max() {
     var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     return arr.reduce((m, current) => {
-      if (current > m) {
+      if (current.length > m.length) {
         return current;
       }
 
       return m;
-    }, 0);
+    }, []);
   }
 
-  function getSubTestRank(line, subTest, startPos, parentRank) {
+  function getSubTestRank(line, subTest, startPos) {
+    var parentRank = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
     if (!subTest.length) return parentRank;
     var positions = getPos(line, subTest[0], startPos);
 
     if (positions && positions.length) {
       var newSubranks = positions.map(newPos => {
-        var newRank = parentRank;
-        if (newPos[0] === 0) newRank = 1;
+        var newRank = parentRank.map(a => a);
+        if (newPos[0] === 0) newRank = [0];
 
         if (newPos[0] !== startPos[0]) {
-          newRank = parentRank + 1;
+          newRank.push(newPos[0]);
         }
 
         return getSubTestRank(line, subTest.slice(1), newPos, newRank);
       });
       return max(newSubranks);
     } else {
-      return 0;
+      return [];
     }
   }
 
@@ -176,7 +173,7 @@
       var arr = this.genPinyin(str);
       var testArr = test.split('');
       var startPos = [0, 0, -1];
-      var x = getSubTestRank(arr, testArr, startPos, 0);
+      var x = getSubTestRank(arr, testArr, startPos, []);
       return x;
     }
 

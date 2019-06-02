@@ -3,13 +3,11 @@ function isPosValid(newPos, startPos) {
   const [a0, b0, c0] = startPos;
   const asame = a1 === a0; const bsame = b1 === b0; const
     csame = c1 === c0;
-  if (asame && (!bsame) && c0 >= 0) {
-    return false;
-  }
-  if (asame && bsame && csame) {
-    return false;
-  }
-  if (!asame && (c1 > 0)) {
+  switch(true) {
+    case (asame && (!bsame) && c0 >= 0):
+    case (asame && bsame && csame):
+    case (!asame && (c1 > 0)):
+    case (asame && bsame && (c1 - c0 != 1)):
     return false;
   }
   return newPos;
@@ -53,7 +51,7 @@ function getSubTestRank(line, subTest, startPos, parentRank = []) {
   const positions = getPos(line, subTest[0], startPos);
   if (positions && positions.length) {
     const newSubranks = positions.map((newPos) => {
-      let newRank = parentRank;
+      let newRank = parentRank.map(a => a);
       if (newPos[0] === 0)
         newRank = [0];
       if (newPos[0] !== startPos[0]) {
