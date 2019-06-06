@@ -4,10 +4,10 @@ function isPosValid(newPos, startPos) {
   const asame = a1 === a0; const bsame = b1 === b0; const
     csame = c1 === c0;
   switch(true) {
-    case (asame && (!bsame) && c0 >= 0):
-    case (asame && bsame && csame):
-    case (!asame && (c1 > 0)):
-    case (asame && bsame && (c1 - c0 != 1)):
+    case (asame && (!bsame) && c0 >= 0):　// 同字，不同音
+    case (asame && bsame && csame):　// 完全相同，忽略
+    case ((!asame || !bsame || c0 < 0) && (c1 > 0)):　// 切换字时，从首字母开始匹配
+    case (asame && bsame && (c1 - c0 != 1)): // 检测拼音是否连续
     return false;
   }
   return newPos;
@@ -52,8 +52,9 @@ function getSubTestRank(line, subTest, startPos, parentRank = []) {
   if (positions && positions.length) {
     const newSubranks = positions.map((newPos) => {
       let newRank = parentRank.map(a => a);
-      if (newPos[0] === 0)
+      if (newPos[0] === 0) {
         newRank = [0];
+      }
       if (newPos[0] !== startPos[0]) {
         newRank.push(newPos[0])
       }

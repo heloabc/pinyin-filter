@@ -57,10 +57,14 @@
     var csame = c1 === c0;
 
     switch (true) {
-      case asame && !bsame && c0 >= 0:
-      case asame && bsame && csame:
-      case !asame && c1 > 0:
+      case asame && !bsame && c0 >= 0: // 同字，不同音
+
+      case asame && bsame && csame: // 完全相同，忽略
+
+      case (!asame || !bsame || c0 < 0) && c1 > 0: // 切换字时，从首字母开始匹配
+
       case asame && bsame && c1 - c0 != 1:
+        // 检测拼音是否连续
         return false;
     }
 
@@ -121,7 +125,10 @@
     if (positions && positions.length) {
       var newSubranks = positions.map(newPos => {
         var newRank = parentRank.map(a => a);
-        if (newPos[0] === 0) newRank = [0];
+
+        if (newPos[0] === 0) {
+          newRank = [0];
+        }
 
         if (newPos[0] !== startPos[0]) {
           newRank.push(newPos[0]);
