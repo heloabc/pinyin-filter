@@ -1,6 +1,6 @@
 {
-  "name": "pinyin-test",
-  "version": "0.8.1",
+  "name": "pinyin-filter",
+  "version": "0.8.3",
   "description": "Chinese pinyin filter",
   "main": "dist/index.js",
   "scripts": {

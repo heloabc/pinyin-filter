@@ -4,15 +4,18 @@
 
 ## 使用方法：
 ```
-npm i -s pinyin-test
+npm i -s pinyin-filter
 
-const Pinyin = require('pinyin-test');
+const Pinyin = require('pinyin-filter');
 const dict = require('./dict.json');
 
 p = new Pinyin(dict);
 
 r = p.test('拼音', 'pinyin');
 ```
+
+demo page [https://roughwin.github.io/pinyin-filter-demo/dist/](https://roughwin.github.io/pinyin-filter-demo/dist/)
+
 ### 注意：
 字典需要手动加载，可以根据实际情况选择合适的字典。
 demo：[https://github.com/roughwin/pinyin-filter/blob/master/test/word.json](https://github.com/roughwin/pinyin-filter/blob/master/test/word.json)

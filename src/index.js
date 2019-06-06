@@ -3,13 +3,11 @@ function isPosValid(newPos, startPos) {
   const [a0, b0, c0] = startPos;
   const asame = a1 === a0; const bsame = b1 === b0; const
     csame = c1 === c0;
-  if (asame && (!bsame) && c0 >= 0) {
-    return false;
-  }
-  if (asame && bsame && csame) {
-    return false;
-  }
-  if (!asame && (c1 > 0)) {
+  switch(true) {
+    case (asame && (!bsame) && c0 >= 0):
+    case (asame && bsame && csame):
+    case (!asame && (c1 > 0)):
+    case (asame && bsame && (c1 - c0 != 1)):
     return false;
   }
   return newPos;
@@ -41,29 +39,29 @@ function getPos(line, char, lastPos) {
 
 function max(arr = []) {
   return arr.reduce((m, current) => {
-    if (current > m) {
+    if (current.length > m.length) {
       return current;
     }
     return m;
-  }, 0)
+  }, [])
 }
 
-function getSubTestRank(line, subTest, startPos, parentRank) {
+function getSubTestRank(line, subTest, startPos, parentRank = []) {
   if (!subTest.length) return parentRank;
   const positions = getPos(line, subTest[0], startPos);
   if (positions && positions.length) {
     const newSubranks = positions.map((newPos) => {
-      let newRank = parentRank;
+      let newRank = parentRank.map(a => a);
       if (newPos[0] === 0)
-        newRank = 1;
+        newRank = [0];
       if (newPos[0] !== startPos[0]) {
-        newRank = parentRank + 1
+        newRank.push(newPos[0])
       }
       return getSubTestRank(line, subTest.slice(1), newPos, newRank)
     });
     return max(newSubranks);
   } else {
-    return 0;
+    return [];
   }
 }
 
@@ -104,7 +102,7 @@ class Pinyin {
     const arr = this.genPinyin(str);
     const testArr = test.split('');
     let startPos = [0, 0, -1];
-    const x = getSubTestRank(arr, testArr, startPos, 0)
+    const x = getSubTestRank(arr, testArr, startPos, [])
     return x;
   }
 }
