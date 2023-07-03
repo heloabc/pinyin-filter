@@ -14,7 +14,7 @@ p = new Pinyin(dict);
 r = p.test('拼音', 'pinyin');
 ```
 
-demo page [https://heloabc.github.io/pinyin-filter-demo/dist/](https://roughwin.github.io/pinyin-filter-demo/dist/)
+demo page [https://heloabc.github.io/pinyin-filter-demo/dist/](https://heloabc.github.io/pinyin-filter-demo/dist/)
 
 ### 注意：
 字典需要手动加载，可以根据实际情况选择合适的字典。
